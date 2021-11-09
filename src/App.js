@@ -1,14 +1,16 @@
-import React from 'react';
-import "normalize.css";
-import "@blueprintjs/core/lib/css/blueprint.css";
-import "@blueprintjs/icons/lib/css/blueprint-icons.css";
+import React from 'react'
+import 'normalize.css'
+import '@blueprintjs/core/lib/css/blueprint.css'
+import '@blueprintjs/icons/lib/css/blueprint-icons.css'
 
-function App() {
+import { GlobalStyle } from './GlobalStyle'
+
+const App = () => {
   return (
     <div className="App">
-      Start here.
+      Start here. <GlobalStyle />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
