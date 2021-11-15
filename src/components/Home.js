@@ -14,41 +14,34 @@ import { useHomeFetch } from '../hooks/useHomeFetch'
 import NoImage from '../images/no_image.jpg'
 
 const Home = () => {
-  const { state, loading, error, setSearchTerm } = useHomeFetch()
-  console.log(state)
+  const { state, loading, error, searchTerm, setSearchTerm } = useHomeFetch()
 
   return (
     <>
-      {loading ? (
-        <SpinnerWrapper />
-      ) : (
-        <>
-          {state.results[0] && (
-            <HeroImage
-              image={`${IMAGE_BASE_URL}${BACKDROP_SIZE}${state.results[0].backdrop_path}`}
-              title={state.results[0].original_title}
-              text={state.results[0].overview}
-            />
-          )}
-          <SearchWrapper setSearchTerm={setSearchTerm} />
-          <Grid header="Popular movies">
-            {state.results.map((movie) => (
-              // <div key={movie.id}>{movie.title}</div>
-              <Thumb
-                key={movie.id}
-                clickable
-                image={
-                  movie.poster_path
-                    ? IMAGE_BASE_URL + POSTER_SIZE + movie.poster_path
-                    : NoImage
-                }
-                movieId={movie.id}
-              />
-            ))}
-          </Grid>
-          )
-        </>
-      )}
+      {!searchTerm && state.results[0] ? (
+        <HeroImage
+          image={`${IMAGE_BASE_URL}${BACKDROP_SIZE}${state.results[0].backdrop_path}`}
+          title={state.results[0].original_title}
+          text={state.results[0].overview}
+        />
+      ) : null}
+      <SearchWrapper setSearchTerm={setSearchTerm} />
+      <Grid header="Popular movies">
+        {state.results.map((movie) => (
+          // <div key={movie.id}>{movie.title}</div>
+          <Thumb
+            key={movie.id}
+            clickable
+            image={
+              movie.poster_path
+                ? IMAGE_BASE_URL + POSTER_SIZE + movie.poster_path
+                : NoImage
+            }
+            movieId={movie.id}
+          />
+        ))}
+      </Grid>
+      <SpinnerWrapper />
     </>
   )
 }
