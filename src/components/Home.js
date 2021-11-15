@@ -26,7 +26,7 @@ const Home = () => {
         />
       ) : null}
       <SearchWrapper setSearchTerm={setSearchTerm} />
-      <Grid header="Popular movies">
+      <Grid header={searchTerm ? 'Search result' : 'Popular movies'}>
         {state.results.map((movie) => (
           // <div key={movie.id}>{movie.title}</div>
           <Thumb
