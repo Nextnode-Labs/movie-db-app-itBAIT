@@ -1,6 +1,6 @@
-import { Icon, IconSize, InputGroup } from '@blueprintjs/core'
+import { Classes, Icon, IconSize, InputGroup, Intent } from '@blueprintjs/core'
 import { useEffect, useRef, useState } from 'react'
-import { Wrapper } from './SearchWrapper.style'
+import { Content, Wrapper } from './SearchWrapper.style'
 
 const SearchWrapper = ({ setSearchTerm }) => {
   const [state, setState] = useState('')
@@ -17,17 +17,19 @@ const SearchWrapper = ({ setSearchTerm }) => {
     return () => clearTimeout(timer)
   }, [setSearchTerm, state])
   return (
-    <Wrapper>
-      <InputGroup
-        //   asyncControl={true}
-        //   disabled={disabled}
-        className="bp3-round"
-        large="true"
-        leftIcon="search"
-        placeholder="Search movie..."
-        onChange={(e) => setState(e.currentTarget.value)}
-        value={state}
-      />
+    <Wrapper className="bp3-dark">
+      <Content>
+        <InputGroup
+          //   asyncControl={true}
+          //   disabled={disabled}
+          large
+          type="search"
+          leftIcon="search"
+          placeholder="Search movie..."
+          onChange={(e) => setState(e.currentTarget.value)}
+          value={state}
+        />
+      </Content>
     </Wrapper>
   )
 }
