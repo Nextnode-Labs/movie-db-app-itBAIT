@@ -3,7 +3,7 @@ import { Wrapper } from './SpinnerWrapper.styles'
 
 const SpinnerWrapper = () => (
   <Wrapper>
-    <Spinner size={SpinnerSize.LARGE} intent="danger" />
+    <Spinner size={SpinnerSize.STANDARD} intent="success" />
   </Wrapper>
 )
 

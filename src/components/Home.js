@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react'
 // config
 import { POSTER_SIZE, BACKDROP_SIZE, IMAGE_BASE_URL } from '../config'
 // components
@@ -7,6 +6,7 @@ import Grid from './Grid'
 import Thumb from './Thumb'
 import SpinnerWrapper from './SpinnerWrapper'
 import SearchWrapper from './SearchWrapper'
+import ButtonWrapper from './ButtonWrapper'
 
 // hooks
 import { useHomeFetch } from '../hooks/useHomeFetch'
@@ -14,7 +14,10 @@ import { useHomeFetch } from '../hooks/useHomeFetch'
 import NoImage from '../images/no_image.jpg'
 
 const Home = () => {
-  const { state, loading, error, searchTerm, setSearchTerm } = useHomeFetch()
+  const { state, loading, error, searchTerm, setSearchTerm, setSsLoadingMore } =
+    useHomeFetch()
+
+  if (error) return <div>Something went wrong...</div>
 
   return (
     <>
@@ -41,7 +44,14 @@ const Home = () => {
           />
         ))}
       </Grid>
-      <SpinnerWrapper />
+      {/* {loading && <SpinnerWrapper />} */}
+      {loading && <ButtonWrapper loading />}
+      {state.page < state.total_pages && !loading ? (
+        <ButtonWrapper
+          text="Load more"
+          callback={() => setSsLoadingMore(true)}
+        />
+      ) : null}
     </>
   )
 }
