@@ -1,8 +1,8 @@
 import { InputGroup } from '@blueprintjs/core'
 import { useEffect, useRef, useState } from 'react'
-import { Content, Wrapper } from './SearchWrapper.style'
+import { Content, Wrapper } from './Search.style'
 
-const SearchWrapper = ({  setSearchTerm }) => {
+const Search = ({  setSearchTerm }) => {
   const [state, setState] = useState('')
   const initial = useRef(true)
 
@@ -34,4 +34,4 @@ const SearchWrapper = ({  setSearchTerm }) => {
   )
 }
 
-export default SearchWrapper
+export default Search

@@ -4,9 +4,9 @@ import { POSTER_SIZE, BACKDROP_SIZE, IMAGE_BASE_URL } from '../config'
 import HeroImage from './HeroImage'
 import Grid from './Grid'
 import Thumb from './Thumb'
-import SpinnerWrapper from './SpinnerWrapper'
-import SearchWrapper from './SearchWrapper'
-import ButtonWrapper from './ButtonWrapper'
+// import Spinner from './Spinner'
+import Search from './Search'
+import Button from './Button'
 
 // hooks
 import { useHomeFetch } from '../hooks/useHomeFetch'
@@ -28,7 +28,7 @@ const Home = () => {
           text={state.results[0].overview}
         />
       ) : null}
-      <SearchWrapper setSearchTerm={setSearchTerm} />
+      <Search setSearchTerm={setSearchTerm} />
       <Grid header={searchTerm ? 'Search result' : 'Popular movies'}>
         {state.results.map((movie) => (
           // <div key={movie.id}>{movie.title}</div>
@@ -45,12 +45,9 @@ const Home = () => {
         ))}
       </Grid>
       {/* {loading && <SpinnerWrapper />} */}
-      {loading && <ButtonWrapper loading />}
+      {loading && <Button loading />}
       {state.page < state.total_pages && !loading ? (
-        <ButtonWrapper
-          text="Load more"
-          callback={() => setSsLoadingMore(true)}
-        />
+        <Button text="Load more" callback={() => setSsLoadingMore(true)} />
       ) : null}
     </>
   )
