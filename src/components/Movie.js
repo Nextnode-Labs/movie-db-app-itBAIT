@@ -12,10 +12,12 @@ import { useParams } from 'react-router'
 const Movie = () => {
   const { movieID } = useParams()
   const { state: movie, loading, error } = useMovieFetch(movieID)
+
+  if (loading) return <Spinner />
+  if (error) return <div>Something went wrong...</div>
   return (
     <>
-      <BreadCrumb movieTitle={movie.title} />
-      <div>Movie</div>
+      <BreadCrumb movieTitle={movie.original_title} />
     </>
   )
 }
