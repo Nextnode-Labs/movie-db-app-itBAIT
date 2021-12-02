@@ -7,13 +7,13 @@ const MovieInfoBar = ({ time, budget, revenue }) => (
   <Wrapper>
     <Content>
       <div className="column">
-        <Button>Running time: {calcTime(time)}</Button>
+        <Button className="btn">Running time: {calcTime(time)}</Button>
       </div>
       <div className="column">
-        <Button>Budget: {convertMoney(budget)}</Button>
+        <Button className="btn">Budget: {convertMoney(budget)}</Button>
       </div>
       <div className="column">
-        <Button>Revenue: {convertMoney(revenue)}</Button>
+        <Button className="btn">Revenue: {convertMoney(revenue)}</Button>
       </div>
     </Content>
   </Wrapper>
