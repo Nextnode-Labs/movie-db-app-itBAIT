@@ -19,7 +19,7 @@ const Movie: React.FC = () => {
 
   const { state: movie, loading, error } = useMovieFetch(movieIdP)
 
-  if (loading) return <Spinner />
+  if (loading && !error) return <Spinner />
   if (error) return <div>Something went wrong...</div>
   return (
     <>

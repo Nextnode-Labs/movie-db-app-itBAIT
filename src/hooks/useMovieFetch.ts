@@ -46,5 +46,9 @@ export const useMovieFetch = (movieId: string) => {
     sessionStorage.setItem(movieId, JSON.stringify(state))
   }, [movieId, state])
 
+  useEffect(() => {
+    if (error) sessionStorage.removeItem(movieId)
+  }, [movieId, error])
+
   return { state, loading, error }
 }
