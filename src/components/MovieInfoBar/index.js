@@ -2,6 +2,7 @@ import { Wrapper, Content } from './MovieInfoBar.styles'
 
 import { calcTime, convertMoney } from '../../helpers'
 import { Button } from '@blueprintjs/core'
+import PropTypes from 'prop-types'
 
 const MovieInfoBar = ({ time, budget, revenue }) => (
   <Wrapper>
@@ -18,5 +19,11 @@ const MovieInfoBar = ({ time, budget, revenue }) => (
     </Content>
   </Wrapper>
 )
+
+MovieInfoBar.propTypes = {
+  time: PropTypes.number,
+  budget: PropTypes.number,
+  revenue: PropTypes.number,
+}
 
 export default MovieInfoBar

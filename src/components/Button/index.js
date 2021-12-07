@@ -1,5 +1,6 @@
 import { Button as BPButton } from '@blueprintjs/core'
 import { Wrapper } from './Button.styles'
+import PropTypes from 'prop-types'
 
 const Button = ({ text, callback, loading }) => (
   <Wrapper>
@@ -8,5 +9,11 @@ const Button = ({ text, callback, loading }) => (
     </BPButton>
   </Wrapper>
 )
+
+Button.propTypes = {
+  text: PropTypes.string,
+  callback: PropTypes.func,
+  loading: PropTypes.bool,
+}
 
 export default Button
