@@ -20,7 +20,7 @@ export type Movie = {
   backdrop_path: string
   id: number
   original_title: string
-  overviews: string
+  overview: string
   popularity: number
   poster_path: string
   title: string
