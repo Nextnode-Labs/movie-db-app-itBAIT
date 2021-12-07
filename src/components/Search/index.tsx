@@ -1,9 +1,12 @@
 import { InputGroup } from '@blueprintjs/core'
 import { useEffect, useRef, useState } from 'react'
 import { Content, Wrapper } from './Search.style'
-import PropTypes from 'prop-types'
 
-const Search = ({ setSearchTerm }) => {
+type Props = {
+  setSearchTerm: React.Dispatch<React.SetStateAction<string>>
+}
+
+const Search: React.FC<Props> = ({ setSearchTerm }) => {
   const [state, setState] = useState('')
   const initial = useRef(true)
 
@@ -33,10 +36,6 @@ const Search = ({ setSearchTerm }) => {
       </Content>
     </Wrapper>
   )
-}
-
-Search.propTypes = {
-  setSearchTerm: PropTypes.func,
 }
 
 export default Search
