@@ -16,7 +16,7 @@ const App: React.FC = () => (
     <Header />
     <Routes>
       <Route path="/" element={<Home />}></Route>
-      <Route path="/:movieID" element={<Movie />}></Route>
+      <Route path="/:movieId" element={<Movie />}></Route>
       <Route path="/*" element={<NotFound />}></Route>
     </Routes>
 
