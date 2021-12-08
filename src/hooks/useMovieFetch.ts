@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
 // API
-import API from '../API'
+import API, { Movie, Cast, Crew } from '../API'
 import { isPersistedState } from '../helpers'
 
-export const useMovieFetch = (movieID) => {
-  const [state, setState] = useState({})
+export type MovieState = Movie & { actors: Cast[]; directors: Crew[] }
+
+export const useMovieFetch = (movieId: string) => {
+  const [state, setState] = useState<MovieState>({} as MovieState)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
 
@@ -13,8 +15,8 @@ export const useMovieFetch = (movieID) => {
       try {
         setLoading(true)
         setError(false)
-        const movie = await API.fetchMovie(movieID)
-        const credits = await API.fetchCredits(movieID)
+        const movie = await API.fetchMovie(movieId)
+        const credits = await API.fetchCredits(movieId)
         // Get directors
         const directors = credits.crew.filter(
           (member) => member.job === 'Director'
@@ -30,7 +32,7 @@ export const useMovieFetch = (movieID) => {
       }
     }
 
-    const sessionState = isPersistedState(movieID)
+    const sessionState = isPersistedState(movieId)
     if (sessionState) {
       setState(sessionState)
       setLoading(false)
@@ -38,11 +40,15 @@ export const useMovieFetch = (movieID) => {
     }
 
     fetchMovie()
-  }, [movieID])
+  }, [movieId])
 
   useEffect(() => {
-    sessionStorage.setItem(movieID, JSON.stringify(state))
-  }, [movieID, state])
+    sessionStorage.setItem(movieId, JSON.stringify(state))
+  }, [movieId, state])
+
+  useEffect(() => {
+    if (error) sessionStorage.removeItem(movieId)
+  }, [movieId, error])
 
   return { state, loading, error }
 }

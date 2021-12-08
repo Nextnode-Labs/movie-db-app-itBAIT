@@ -2,9 +2,12 @@ import { Boundary, Breadcrumbs as BPBreadcrumb } from '@blueprintjs/core'
 
 import { Wrapper, Content } from './BreadCrumb.styles'
 import { useNavigate } from 'react-router-dom'
-import PropTypes from 'prop-types'
 
-const BreadCrumb = ({ movieTitle }) => {
+type Props = {
+  movieTitle: string
+}
+
+const BreadCrumb: React.FC<Props> = ({ movieTitle }) => {
   const navigate = useNavigate()
   const goHome = () => {
     navigate('/')
@@ -18,10 +21,6 @@ const BreadCrumb = ({ movieTitle }) => {
       </Content>
     </Wrapper>
   )
-}
-
-BreadCrumb.propTypes = {
-  movieTitle: PropTypes.string,
 }
 
 export default BreadCrumb

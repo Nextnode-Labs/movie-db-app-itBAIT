@@ -12,11 +12,14 @@ import NoImage from '../images/no_image.jpg'
 
 import { useParams } from 'react-router'
 
-const Movie = () => {
-  const { movieID } = useParams()
-  const { state: movie, loading, error } = useMovieFetch(movieID)
+const Movie: React.FC = () => {
+  let { movieId } = useParams()
 
-  if (loading) return <Spinner />
+  const movieIdP = movieId ? movieId : ''
+
+  const { state: movie, loading, error } = useMovieFetch(movieIdP)
+
+  if (loading && !error) return <Spinner />
   if (error) return <div>Something went wrong...</div>
   return (
     <>
