@@ -3,16 +3,29 @@ import RMDBLogo from '../../images/react-movie-logo.svg'
 import TMDBLogo from '../../images/tmdb_logo.svg'
 
 import { Wrapper, Content, LogoImg, TMDBLogoImg } from './Header.styles'
+import { Context } from '../../context'
+import { useContext } from 'react'
 
-const Header: React.FC  = () => (
-  <Wrapper>
-    <Content>
-      <Link to="/">
-        <LogoImg src={RMDBLogo} alt="rmdb-logo" />
-      </Link>
-      <TMDBLogoImg src={TMDBLogo} alt="tmdb-logo" />
-    </Content>
-  </Wrapper>
-)
+const Header: React.FC = () => {
+  const [user]: any = useContext(Context)
+  console.log(user)
+  return (
+    <Wrapper>
+      <Content>
+        <Link to="/">
+          <LogoImg src={RMDBLogo} alt="rmdb-logo" />
+        </Link>
+        {user ? (
+          <span>Logged as: {user.userName}</span>
+        ) : (
+          <Link to="/login">
+            <span>Log in</span>
+          </Link>
+        )}
+        <TMDBLogoImg src={TMDBLogo} alt="tmdb-logo" />
+      </Content>
+    </Wrapper>
+  )
+}
 
 export default Header
