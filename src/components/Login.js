@@ -44,6 +44,7 @@ const Login = () => {
         name="username"
         onChange={handleInput}
       />
+      <label>Password:</label>
       <input
         type="password"
         value={password}
