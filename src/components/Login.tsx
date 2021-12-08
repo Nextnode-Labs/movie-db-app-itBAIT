@@ -5,28 +5,27 @@ import { Wrapper } from './Login.styles'
 import { Context } from '../context'
 import { useContext, useState } from 'react'
 
-const Login = () => {
+const Login: React.FC = () => {
   const [userName, setUserName] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState(false)
 
-  const [_user, setuser] = useContext(Context)
+  const [_user,setuser]: any = useContext(Context)
   const navigate = useNavigate()
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async () => {
     setError(false)
     try {
       const requestToken = await API.getRequestToken()
       const sessionId = await API.authenticate(requestToken, userName, password)
       setuser({ sessionId: sessionId.session_id, userName })
-      console.log(sessionId)
       navigate('/')
     } catch {
       setError(true)
     }
   }
 
-  const handleInput = (e) => {
+  const handleInput = (e: React.FormEvent<HTMLInputElement>) => {
     const name = e.currentTarget.name
     const value = e.currentTarget.value
 

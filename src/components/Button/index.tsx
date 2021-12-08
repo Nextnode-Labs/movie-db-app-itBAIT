@@ -3,7 +3,7 @@ import { Wrapper } from './Button.styles'
 
 type Props = {
   text?: string
-  callback?: () => void
+  callback?: (() => void) | ((e: any) => Promise<void>)
   loading?: boolean
 }
 

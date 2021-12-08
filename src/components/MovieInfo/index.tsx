@@ -16,7 +16,7 @@ type Props = {
 const MovieInfo: React.FC<Props> = ({ movie }) => {
   const [user]: any = useContext(Context)
   const handleRating = async (value: string) => {
-    const rate = await API.rateMovie(user.sessionId, movie.id, parseInt(value))
+    await API.rateMovie(user.sessionId, movie.id, parseInt(value))
   }
   return (
     <Wrapper backdrop={movie.backdrop_path}>
