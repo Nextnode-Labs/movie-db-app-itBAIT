@@ -10,7 +10,7 @@ const UserProvider: React.FC = ({ children }) => {
   useEffect(() => {
     if (cookies.user && cookies.session_id)
       setState({ sessionId: cookies.session_id, userName: cookies.user })
-  }, [])
+  }, [cookies])
 
   return (
     <Context.Provider value={[state, setState, cookies, setCookie] as any}>
