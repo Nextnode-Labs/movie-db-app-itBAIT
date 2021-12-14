@@ -10,7 +10,7 @@ const Login: React.FC = () => {
   const [password, setPassword] = useState('')
   const [error, setError] = useState(false)
 
-  const [_user,setuser]: any = useContext(Context)
+  const [_user, setuser, _cookies, setCookie]: any = useContext(Context)
   const navigate = useNavigate()
 
   const handleSubmit = async () => {
@@ -19,6 +19,8 @@ const Login: React.FC = () => {
       const requestToken = await API.getRequestToken()
       const sessionId = await API.authenticate(requestToken, userName, password)
       setuser({ sessionId: sessionId.session_id, userName })
+      setCookie('user', userName)
+      setCookie('session_id', sessionId.session_id)
       navigate('/')
     } catch {
       setError(true)
