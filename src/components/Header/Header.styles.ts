@@ -18,6 +18,13 @@ export const Content = styled.div`
     color: var(--white);
     text-decoration: none;
   }
+
+  .logout {
+    cursor: pointer;
+  }
+  .logout::before {
+    content: ' | ';
+  }
 `
 
 export const LogoImg = styled.img`
