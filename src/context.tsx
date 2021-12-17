@@ -5,7 +5,11 @@ export const Context = createContext(undefined)
 
 const UserProvider: React.FC = ({ children }) => {
   const [state, setState]: any = useState(undefined)
-  const [cookies, setCookie] = useCookies(['user', 'session_id', 'account_id'])
+  const [cookies, setCookie, removeCookie] = useCookies([
+    'user',
+    'session_id',
+    'account_id',
+  ])
 
   useEffect(() => {
     if (cookies.user && cookies.session_id && cookies.account_id)
@@ -17,7 +21,9 @@ const UserProvider: React.FC = ({ children }) => {
   }, [cookies])
 
   return (
-    <Context.Provider value={[state, setState, cookies, setCookie] as any}>
+    <Context.Provider
+      value={[state, setState, cookies, setCookie, removeCookie] as any}
+    >
       {children}
     </Context.Provider>
   )

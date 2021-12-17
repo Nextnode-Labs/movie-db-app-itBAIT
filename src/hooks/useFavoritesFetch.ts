@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 // API
 import API, { Movie } from '../API'
 import { Context } from '../context'
@@ -18,28 +18,34 @@ export const useFavoritesFetch = () => {
   const [isLoadingMore, setSsLoadingMore] = useState(false)
   const [user]: any = useContext(Context)
 
-  const fetchFavoriteMovies = async (page: number) => {
-    try {
-      setError(false)
-      setLoading(true)
-      const movies = await API.fetcFavoritehMovies(
-        user.sessionId,
-        user.accountId
-      )
-      setState((prev) => ({
-        ...movies,
-        results:
-          page > 1 ? [...prev.results, ...movies.results] : [...movies.results],
-      }))
-    } catch (error) {
-      setError(true)
-    }
-    setLoading(false)
-  }
+  const fetchFavoriteMovies = useCallback(
+    async (page: number) => {
+      try {
+        setError(false)
+        setLoading(true)
+        const movies = await API.fetcFavoritehMovies(
+          user.sessionId,
+          user.accountId
+        )
+        setState((prev) => ({
+          ...movies,
+          results:
+            page > 1
+              ? [...prev.results, ...movies.results]
+              : [...movies.results],
+        }))
+      } catch (error) {
+        setError(true)
+      }
+      setLoading(false)
+    },
+    [user]
+  )
+
   // Initial
   useEffect(() => {
     fetchFavoriteMovies(1)
-  }, [user])
+  }, [user, fetchFavoriteMovies])
   // Search
 
   // load more
@@ -47,7 +53,7 @@ export const useFavoritesFetch = () => {
     if (!isLoadingMore) return
     fetchFavoriteMovies(state.page + 1)
     setSsLoadingMore(false)
-  }, [isLoadingMore, state.page, user])
+  }, [isLoadingMore, state.page, user, fetchFavoriteMovies])
 
   return { state, loading, error, setSsLoadingMore }
 }
