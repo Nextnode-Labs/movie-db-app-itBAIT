@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import Button from '../Button'
+import { Button } from '@blueprintjs/core'
 
 type Props = {
   callback: (value: string) => void
@@ -8,7 +8,7 @@ type Props = {
 const Rate: React.FC<Props> = ({ callback }) => {
   const [value, setvalue] = useState('5')
   return (
-    <div>
+    <>
       <input
         type="range"
         min="1"
@@ -16,11 +16,9 @@ const Rate: React.FC<Props> = ({ callback }) => {
         value={value}
         onChange={(e) => setvalue(e.currentTarget.value)}
       />
-      {value}
-      <p>
-        <Button text="Rate" callback={() => callback(value)} />
-      </p>
-    </div>
+      {value}{' '}
+      <Button text="Rate" onClick={() => callback(value)} />
+    </>
   )
 }
 
