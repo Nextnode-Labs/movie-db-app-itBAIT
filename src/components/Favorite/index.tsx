@@ -15,8 +15,14 @@ const Favorite: React.FC<Props> = ({ movieId }) => {
     setFavorite(data.favorite)
   }
   const handleFavorite = async () => {
-    const data = await API.getMovieState(user.sessionId, movieId)
-    setFavorite(data.favorite)
+    const data = await API.favorite(
+      user.sessionId,
+      movieId,
+      user.accountId,
+      favorite
+    )
+    if (data.status_code === 1) setFavorite(true)
+    if (data.status_code === 13) setFavorite(false)
   }
   const [user]: any = useContext(Context)
   const [favorite, setFavorite] = useState(false)

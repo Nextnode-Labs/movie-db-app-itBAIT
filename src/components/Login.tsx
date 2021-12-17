@@ -17,10 +17,16 @@ const Login: React.FC = () => {
     setError(false)
     try {
       const requestToken = await API.getRequestToken()
-      const sessionId = await API.authenticate(requestToken, userName, password)
-      setuser({ sessionId: sessionId.session_id, userName })
+      const session = await API.authenticate(requestToken, userName, password)
+      const account = await API.getAccountDetails(session.session_id)
+      setuser({
+        sessionId: session.session_id,
+        userName,
+        accountId: account.id,
+      })
       setCookie('user', userName)
-      setCookie('session_id', sessionId.session_id)
+      setCookie('session_id', session.session_id)
+      setCookie('account_id', account.id)
       navigate('/')
     } catch {
       setError(true)

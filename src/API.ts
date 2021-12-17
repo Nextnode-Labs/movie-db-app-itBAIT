@@ -105,6 +105,11 @@ const apiSettings = {
       return sessionId
     }
   },
+  getAccountDetails: async (sessionId: number) => {
+    const endpoint = `${API_URL}account?api_key=${API_KEY}&session_id=${sessionId}`
+    const account = await (await fetch(endpoint)).json()
+    return account
+  },
   rateMovie: async (sessionId: number, movieId: number, value: number) => {
     const endpoint = `${API_URL}movie/${movieId}/rating?api_key=${API_KEY}&session_id=${sessionId}`
 
@@ -122,6 +127,25 @@ const apiSettings = {
 
     const data = await (await fetch(endpoint)).json()
 
+    return data
+  },
+  favorite: async (
+    sessionId: number,
+    movieId: number,
+    accountId: number,
+    isFavorite: boolean
+  ) => {
+    const endpoint = `${API_URL}account/${accountId}/favorite?api_key=${API_KEY}&session_id=${sessionId}`
+    const data = await (
+      await fetch(endpoint, {
+        ...defaultConfig,
+        body: JSON.stringify({
+          media_type: 'movie',
+          media_id: movieId,
+          favorite: !isFavorite,
+        }),
+      })
+    ).json()
     return data
   },
 }
