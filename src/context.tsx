@@ -12,7 +12,7 @@ const UserProvider: React.FC = ({ children }) => {
       setState({
         sessionId: cookies.session_id,
         userName: cookies.user,
-        accountid: cookies.account_id,
+        accountId: cookies.account_id,
       })
   }, [cookies])
 

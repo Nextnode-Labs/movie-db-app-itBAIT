@@ -148,6 +148,13 @@ const apiSettings = {
     ).json()
     return data
   },
+  fetcFavoritehMovies: async (
+    sessionId: number,
+    accountId: number
+  ): Promise<Movies> => {
+    const endpoint = `${API_URL}account/${accountId}/favorite/movies?api_key=${API_KEY}&session_id=${sessionId}`
+    return await (await fetch(endpoint)).json()
+  },
 }
 
 export default apiSettings

@@ -8,6 +8,7 @@ import UserProvider from './context'
 
 import Header from './components/Header'
 import Home from './components/Home'
+import Favorites from './components/Favorites'
 import Movie from './components/Movie'
 import NotFound from './components/NotFound'
 import Login from './components/Login'
@@ -20,6 +21,7 @@ const App: React.FC = () => (
       <Header />
       <Routes>
         <Route path="/" element={<Home />}></Route>
+        <Route path="/favorites" element={<Favorites />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/:movieId" element={<Movie />}></Route>
         <Route path="/*" element={<NotFound />}></Route>
