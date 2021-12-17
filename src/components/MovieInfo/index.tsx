@@ -2,6 +2,7 @@ import { Wrapper, Content, Text } from './MovieInfo.styles'
 
 import Thumb from '../Thumb'
 import Rate from '../Rate'
+import Favorite from '../Favorite'
 import API from '../../API'
 import { IMAGE_BASE_URL, POSTER_SIZE } from '../../config'
 import NoImage from '../../images/no_image.jpg'
@@ -18,6 +19,7 @@ const MovieInfo: React.FC<Props> = ({ movie }) => {
   const handleRating = async (value: string) => {
     await API.rateMovie(user.sessionId, movie.id, parseInt(value))
   }
+  
   return (
     <Wrapper backdrop={movie.backdrop_path}>
       <Content>
@@ -47,7 +49,9 @@ const MovieInfo: React.FC<Props> = ({ movie }) => {
           </div>
           {user && (
             <div>
+              <br />
               <Rate callback={handleRating} />
+              <Favorite movieId={movie.id} />
             </div>
           )}
         </Text>

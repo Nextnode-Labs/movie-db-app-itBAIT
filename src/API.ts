@@ -117,6 +117,13 @@ const apiSettings = {
 
     return rating
   },
+  getMovieState: async (sessionId: number, movieId: number) => {
+    const endpoint = `${API_URL}movie/${movieId}/account_states?api_key=${API_KEY}&session_id=${sessionId}`
+
+    const data = await (await fetch(endpoint)).json()
+
+    return data
+  },
 }
 
 export default apiSettings
