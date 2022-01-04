@@ -148,7 +148,7 @@ const apiSettings = {
     ).json()
     return data
   },
-  fetcFavoritehMovies: async (
+  fetchFavoritehMovies: async (
     sessionId: number,
     accountId: number
   ): Promise<Movies> => {
