@@ -18,7 +18,7 @@ const UserProvider: React.FC = ({ children }) => {
         if (
           data?.status_code !== 3 &&
           data?.username === cookies.user &&
-          data?.id == cookies.account_id
+          data?.id.toString() === cookies.account_id
         ) {
           setState({
             sessionId: cookies.session_id,
@@ -33,7 +33,7 @@ const UserProvider: React.FC = ({ children }) => {
         }
       })
     }
-  }, [cookies])
+  }, [cookies, removeCookie])
 
   return (
     <Context.Provider
