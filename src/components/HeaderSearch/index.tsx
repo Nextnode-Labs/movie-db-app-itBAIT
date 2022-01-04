@@ -1,28 +1,26 @@
 import { InputGroup } from '@blueprintjs/core'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Content } from './HeaderSearch.style'
+import API, { Movies, Movie } from '../../API'
 
-type Props = {
-  temp?: boolean
-}
-
-const HeaderSearch: React.FC<Props> = ({ temp }) => {
-  const _d = temp
+const HeaderSearch: React.FC = () => {
   const [state, setState] = useState('')
+  const [results, setResults] = useState<Movie[]>([])
+
   //const initial = useRef(true)
 
-  // useEffect(() => {
-  //   if (initial.current) {
-  //     initial.current = false
-  //     return
-  //   }
-  //   const timer = setTimeout(() => {
-  //     setSearchTerm(state)
-  //   }, 1000)
-  //   return () => clearTimeout(timer)
-  // }, [setSearchTerm, state])
+  useEffect(() => {
+    if (state?.trim()) {
+      API.searchMovie(state).then((data: Movies) => {
+        setResults(data.results)
+      })
+    }
+  }, [state])
+
   return (
-    <Content className={'bp4-dark' + (state.length > 0 ? ' expanded' : '')}>
+    <Content
+      className={'bp4-dark' + (state.length > 0 ? ' expanded' : ' expanded')}
+    >
       <InputGroup
         //   asyncControl={true}
         //   disabled={disabled}
@@ -39,7 +37,15 @@ const HeaderSearch: React.FC<Props> = ({ temp }) => {
         }}
         value={state}
       />
-      <div className="results">f</div>
+      {results.length > 0 && (
+        <div className="results">
+          {results.map((movie) => (
+            <div key={movie.id} className="result-item">
+              {movie.title}
+            </div>
+          ))}
+        </div>
+      )}
     </Content>
   )
 }

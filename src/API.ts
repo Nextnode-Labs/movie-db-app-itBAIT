@@ -72,6 +72,10 @@ const apiSettings = {
     const creditsEndpoint: string = `${API_URL}movie/${movieId}/credits?api_key=${API_KEY}`
     return await (await fetch(creditsEndpoint)).json()
   },
+  searchMovie: async (searchTerm: string): Promise<Movies> => {
+    const endpoint: string = `${API_URL}search/movie?api_key=${API_KEY}&query=${searchTerm}`
+    return await (await fetch(endpoint)).json()
+  },
   // Bonus material below for login
   getRequestToken: async () => {
     const reqToken = await (await fetch(REQUEST_TOKEN_URL)).json()

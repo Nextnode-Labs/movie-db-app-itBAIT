@@ -14,10 +14,18 @@ export const Content = styled.div`
     margin-top: 20px;
     z-index: 10;
     position: absolute;
-    padding: 3px;
+    padding: 10px;
     min-height: 1rem;
     width: 100%;
-    background: red;
+    background: var(--medGrey);
+    color: var(--lightGrey);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .result-item {
+    cursor: pointer;
   }
 
   .bp4-input {
