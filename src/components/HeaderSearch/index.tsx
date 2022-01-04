@@ -22,14 +22,14 @@ const HeaderSearch: React.FC<Props> = ({ temp }) => {
   //   return () => clearTimeout(timer)
   // }, [setSearchTerm, state])
   return (
-    <Content className="bp4-dark">
+    <Content className={'bp4-dark' + (state.length > 0 ? ' expanded' : '')}>
       <InputGroup
         //   asyncControl={true}
         //   disabled={disabled}
         large
         type="search"
         leftIcon="search"
-        placeholder="Search movie..."
+        placeholder="Search..."
         onChange={(e) => setState(e.currentTarget.value)}
         onFocus={(e) => {
           e.currentTarget.setSelectionRange(
@@ -39,6 +39,7 @@ const HeaderSearch: React.FC<Props> = ({ temp }) => {
         }}
         value={state}
       />
+      <div className="results">f</div>
     </Content>
   )
 }
