@@ -6,6 +6,7 @@ import { Wrapper, Content, LogoImg, TMDBLogoImg } from './Header.styles'
 import { Context } from '../../context'
 import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
+import HeaderSearch from '../HeaderSearch'
 
 const Header: React.FC = () => {
   const [user, setUser, , , removeCookie]: any = useContext(Context)
@@ -28,14 +29,19 @@ const Header: React.FC = () => {
             <Link to="/favorites">
               <span>Logged as: {user.userName}</span>
             </Link>
-            <span className='logout' onClick={logout}>Logout</span>
+            <span className="logout" onClick={logout}>
+              Logout
+            </span>
           </span>
         ) : (
           <Link to="/login">
             <span>Log in</span>
           </Link>
         )}
-        <TMDBLogoImg src={TMDBLogo} alt="tmdb-logo" />
+        <div className="right">
+          <HeaderSearch/>
+          <TMDBLogoImg src={TMDBLogo} alt="tmdb-logo" />
+        </div>
       </Content>
     </Wrapper>
   )
