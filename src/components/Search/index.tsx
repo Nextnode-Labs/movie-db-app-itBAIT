@@ -21,7 +21,7 @@ const Search: React.FC<Props> = ({ setSearchTerm }) => {
     return () => clearTimeout(timer)
   }, [setSearchTerm, state])
   return (
-    <Wrapper className="bp3-dark">
+    <Wrapper className="bp4-dark">
       <Content>
         <InputGroup
           //   asyncControl={true}

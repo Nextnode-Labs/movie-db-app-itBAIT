@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie'
+import API from './API'
 
 export const Context = createContext(undefined)
 
@@ -12,13 +13,27 @@ const UserProvider: React.FC = ({ children }) => {
   ])
 
   useEffect(() => {
-    if (cookies.user && cookies.session_id && cookies.account_id)
-      setState({
-        sessionId: cookies.session_id,
-        userName: cookies.user,
-        accountId: cookies.account_id,
+    if (cookies.user && cookies.session_id && cookies.account_id) {
+      API.getAccountDetails(cookies.session_id).then((data) => {
+        if (
+          data?.status_code !== 3 &&
+          data?.username === cookies.user &&
+          data?.id.toString() === cookies.account_id
+        ) {
+          setState({
+            sessionId: cookies.session_id,
+            userName: cookies.user,
+            accountId: cookies.account_id,
+          })
+        } else {
+          setState(undefined)
+          removeCookie('user')
+          removeCookie('session_id')
+          removeCookie('account_id')
+        }
       })
-  }, [cookies])
+    }
+  }, [cookies, removeCookie])
 
   return (
     <Context.Provider

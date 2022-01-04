@@ -25,6 +25,10 @@ export const Content = styled.div`
   .logout::before {
     content: ' | ';
   }
+  .right {
+    display: flex;
+    gap: 1em;
+  }
 `
 
 export const LogoImg = styled.img`

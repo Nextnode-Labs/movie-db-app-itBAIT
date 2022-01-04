@@ -23,7 +23,7 @@ export const useFavoritesFetch = () => {
       try {
         setError(false)
         setLoading(true)
-        const movies = await API.fetcFavoritehMovies(
+        const movies = await API.fetchFavoritehMovies(
           user.sessionId,
           user.accountId
         )

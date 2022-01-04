@@ -1,5 +1,10 @@
 import styled from 'styled-components'
 
-export const Wrapper = styled.div`
-  /* margin: calc(100vh / 2 - 90px) auto; */
+type Props = {
+  centered?: boolean
+}
+
+export const Wrapper = styled.div<Props>`
+  margin: ${({ centered }) =>
+    centered ? 'calc(100vh / 2 - 90px) auto' : 'unset'};
 `

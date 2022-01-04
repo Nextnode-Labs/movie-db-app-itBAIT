@@ -15,7 +15,7 @@ const BreadCrumb: React.FC<Props> = ({ movieTitle }) => {
 
   const BREADCRUMBS = [{ onClick: goHome, text: 'Home' }, { text: movieTitle }]
   return (
-    <Wrapper className="bp3-dark">
+    <Wrapper className="bp4-dark">
       <Content>
         <BPBreadcrumb collapseFrom={Boundary.END} items={BREADCRUMBS} />
       </Content>
