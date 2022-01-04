@@ -1,3 +1,4 @@
+import { useEffect, useCallback } from 'react'
 // config
 import { POSTER_SIZE, BACKDROP_SIZE, IMAGE_BASE_URL } from '../config'
 // components
@@ -6,16 +7,34 @@ import Grid from './Grid'
 import Thumb from './Thumb'
 // import Spinner from './Spinner'
 import Search from './Search'
-import Button from './Button'
+// import Button from './Button'
+import Spinner from './Spinner'
 
 // hooks
 import { useHomeFetch } from '../hooks/useHomeFetch'
 // images
 import NoImage from '../images/no_image.jpg'
 
-const Home:React.FC = () => {
-  const { state, loading, error, searchTerm, setSearchTerm, setSsLoadingMore } =
+const Home: React.FC = () => {
+  const { state, loading, error, searchTerm, setSearchTerm, setIsLoadingMore } =
     useHomeFetch()
+
+  const scrollHandler = useCallback(() => {
+    const posY = window.scrollY ? window.scrollY : window.pageYOffset
+    if (document.body.clientHeight - window.innerHeight - posY < 100) {
+      if (state.page < state.total_pages && !loading) {
+        document.removeEventListener('scroll', scrollHandler)
+        setIsLoadingMore(true)
+      }
+    }
+  }, [state, loading, setIsLoadingMore])
+
+  useEffect(() => {
+    document.addEventListener('scroll', scrollHandler)
+    return () => {
+      document.removeEventListener('scroll', scrollHandler)
+    }
+  }, [scrollHandler])
 
   if (error) return <div>Something went wrong...</div>
 
@@ -44,11 +63,11 @@ const Home:React.FC = () => {
           />
         ))}
       </Grid>
-      {/* {loading && <SpinnerWrapper />} */}
-      {loading && <Button loading />}
-      {state.page < state.total_pages && !loading ? (
-        <Button text="Load more" callback={() => setSsLoadingMore(true)} />
-      ) : null}
+      {loading && <Spinner />}
+      {/* {loading && <Button loading />} */}
+      {/* {state.page < state.total_pages && !loading ? (
+        <Button text="Load more" callback={() => setIsLoadingMore(true)} />
+      ) : null} */}
     </>
   )
 }
