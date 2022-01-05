@@ -6,21 +6,24 @@ import API, { Movies, Movie } from '../../API'
 const HeaderSearch: React.FC = () => {
   const [state, setState] = useState('')
   const [results, setResults] = useState<Movie[]>([])
+  const [showResults, setShowResults] = useState(false)
 
   //const initial = useRef(true)
 
   useEffect(() => {
+    let timer: NodeJS.Timeout
     if (state?.trim()) {
-      API.searchMovie(state).then((data: Movies) => {
-        setResults(data.results)
-      })
-    }
+      timer = setTimeout(() => {
+        API.searchMovie(state).then((data: Movies) => {
+          setResults(data.results)
+        })
+      }, 500)
+    } else setResults([])
+    return () => clearTimeout(timer)
   }, [state])
 
   return (
-    <Content
-      className={'bp4-dark' + (state.length > 0 ? ' expanded' : ' expanded')}
-    >
+    <Content className={'bp4-dark' + (state.length > 0 ? ' expanded' : '')}>
       <InputGroup
         //   asyncControl={true}
         //   disabled={disabled}
@@ -30,14 +33,18 @@ const HeaderSearch: React.FC = () => {
         placeholder="Search..."
         onChange={(e) => setState(e.currentTarget.value)}
         onFocus={(e) => {
+          setShowResults(true)
           e.currentTarget.setSelectionRange(
             e.currentTarget.value.length,
             e.currentTarget.value.length
           )
         }}
+        onBlur={() => {
+          setShowResults(false)
+        }}
         value={state}
       />
-      {results.length > 0 && (
+      {showResults && results.length > 0 && (
         <div className="results">
           {results.map((movie) => (
             <div key={movie.id} className="result-item">
