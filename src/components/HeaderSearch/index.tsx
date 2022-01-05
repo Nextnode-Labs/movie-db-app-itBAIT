@@ -2,13 +2,14 @@ import { InputGroup } from '@blueprintjs/core'
 import { useState, useEffect } from 'react'
 import { Content } from './HeaderSearch.style'
 import API, { Movies, Movie } from '../../API'
+import { SEARCH_THUMB_SIZE, IMAGE_BASE_URL } from '../../config'
+import NoImage from '../../images/no_image.jpg'
+import { Link } from 'react-router-dom'
 
 const HeaderSearch: React.FC = () => {
   const [state, setState] = useState('')
   const [results, setResults] = useState<Movie[]>([])
-  const [showResults, setShowResults] = useState(false)
-
-  //const initial = useRef(true)
+  const [showResults, setShowResults] = useState(0)
 
   useEffect(() => {
     let timer: NodeJS.Timeout
@@ -21,35 +22,62 @@ const HeaderSearch: React.FC = () => {
     } else setResults([])
     return () => clearTimeout(timer)
   }, [state])
+  useEffect(() => {
+    console.log(showResults)
+  }, [showResults])
 
   return (
     <Content className={'bp4-dark' + (state.length > 0 ? ' expanded' : '')}>
       <InputGroup
-        //   asyncControl={true}
-        //   disabled={disabled}
         large
         type="search"
         leftIcon="search"
         placeholder="Search..."
         onChange={(e) => setState(e.currentTarget.value)}
         onFocus={(e) => {
-          setShowResults(true)
+          setShowResults((prev) => prev + 1)
           e.currentTarget.setSelectionRange(
             e.currentTarget.value.length,
             e.currentTarget.value.length
           )
         }}
         onBlur={() => {
-          setShowResults(false)
+          setTimeout(() => {
+            setShowResults((prev) => prev - 1)
+          })
         }}
         value={state}
       />
-      {showResults && results.length > 0 && (
-        <div className="results">
+      {showResults > 0 && results.length > 0 && (
+        <div
+          className="results"
+          tabIndex={0}
+          onClick={() => {
+            setShowResults(0)
+          }}
+          onFocus={() => {
+            setShowResults((prev) => prev + 1)
+          }}
+          onBlur={() => {
+            setTimeout(() => {
+              setShowResults((prev) => prev - 1)
+            })
+          }}
+        >
           {results.map((movie) => (
-            <div key={movie.id} className="result-item">
-              {movie.title}
-            </div>
+            <Link to={`/${movie.id}`}>
+              <div key={movie.id} className="result-item">
+                <img
+                  src={
+                    movie.poster_path
+                      ? IMAGE_BASE_URL + SEARCH_THUMB_SIZE + movie.poster_path
+                      : NoImage
+                  }
+                  alt={movie.original_title}
+                />
+                <span>{movie.title}</span>
+              </div>
+            </Link>
           ))}
         </div>
       )}

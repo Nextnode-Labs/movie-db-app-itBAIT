@@ -11,6 +11,8 @@ export const Content = styled.div`
   background: ${Colors.DARK_GRAY5};
 
   .results {
+    max-height: 80vh;
+    overflow-y: auto;
     margin-top: 20px;
     z-index: 10;
     position: absolute;
@@ -23,11 +25,13 @@ export const Content = styled.div`
     display: flex;
     flex-direction: column;
     gap: 3px;
+    box-shadow: 0px 2px 5px 2px #555;
+    border: solid 1px rgba(238, 238, 238, 0.3);
+    outline: none;
   }
   .result-item {
     cursor: pointer;
   }
-
   .bp4-input {
     width: 0;
     padding-right: 0 !important;
@@ -40,5 +44,18 @@ export const Content = styled.div`
   &.expanded .bp4-input {
     width: 300px;
     padding-right: 15px;
+  }
+  .result-item {
+    padding: 3px 5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    img {
+      width: 50px;
+      border-radius: 5px;
+    }
+  }
+  .result-item:hover {
+    background: rgba(255, 255, 255, 0.1);
   }
 `
