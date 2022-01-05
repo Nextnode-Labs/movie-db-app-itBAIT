@@ -19,7 +19,7 @@ const MovieInfo: React.FC<Props> = ({ movie }) => {
   const handleRating = async (value: string) => {
     await API.rateMovie(user.sessionId, movie.id, parseInt(value))
   }
-  
+
   return (
     <Wrapper backdrop={movie.backdrop_path}>
       <Content>

@@ -21,7 +21,7 @@ export const Content = styled.div`
     width: 100%;
     background: var(--medGrey);
     color: var(--lightGrey);
-    border-radius: 5px;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
     gap: 3px;

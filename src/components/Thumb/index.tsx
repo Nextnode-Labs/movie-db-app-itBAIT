@@ -4,7 +4,7 @@ import { Image } from './Thumb.styles'
 type Props = {
   image: string
   movieId?: number
-  clickable: boolean
+  clickable?: boolean
 }
 
 const Thumb: React.FC<Props> = ({ image, movieId, clickable }) => (
