@@ -23,7 +23,6 @@ const HeaderSearch: React.FC = () => {
     return () => clearTimeout(timer)
   }, [state])
   useEffect(() => {
-    console.log(showResults)
   }, [showResults])
 
   return (
