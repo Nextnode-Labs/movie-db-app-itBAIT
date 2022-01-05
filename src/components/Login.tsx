@@ -21,10 +21,10 @@ const Login: React.FC = () => {
       const account = await API.getAccountDetails(session.session_id)
       setuser({
         sessionId: session.session_id,
-        userName,
+        userName: account.username,
         accountId: account.id,
       })
-      setCookie('user', userName)
+      setCookie('user', account.username)
       setCookie('session_id', session.session_id)
       setCookie('account_id', account.id)
       navigate('/')
