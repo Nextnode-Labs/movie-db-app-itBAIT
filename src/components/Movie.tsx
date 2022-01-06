@@ -1,4 +1,4 @@
-import { IMAGE_BASE_URL, POSTER_SIZE } from '../config'
+import { IMAGE_BASE_URL, POSTER_SIZE, SITE_NAME } from '../config'
 import Grid from './Grid'
 import Spinner from './Spinner'
 import BreadCrumb from './BreadCrumb'
@@ -11,6 +11,7 @@ import { useMovieFetch } from '../hooks/useMovieFetch'
 import NoImage from '../images/no_image.jpg'
 
 import { useParams } from 'react-router'
+import { useEffect } from 'react'
 
 const Movie: React.FC = () => {
   let { movieId } = useParams()
@@ -18,6 +19,10 @@ const Movie: React.FC = () => {
   const movieIdP = movieId ? movieId : ''
 
   const { state: movie, loading, error } = useMovieFetch(movieIdP)
+
+  useEffect(() => {
+    document.title = `${movie.original_title || 'Loading...'} | ${SITE_NAME}`
+  }, [movie])
 
   if (loading && !error) return <Spinner centered />
   if (error) return <div>Something went wrong...</div>
