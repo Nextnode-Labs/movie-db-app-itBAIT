@@ -60,7 +60,17 @@ export const Image = styled.img`
   object-fit: cover;
   border-radius: 15px;
   align-self: center;
+  animation: animateThumb 0.5s;
   @media screen and (max-width: 768px) {
     height: auto;
+  }
+
+  @keyframes animateThumb {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 `
