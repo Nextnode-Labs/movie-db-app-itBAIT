@@ -4,6 +4,7 @@ import { Content } from './HeaderSearch.style'
 import API, { Movies, Movie } from '../../API'
 import { SEARCH_THUMB_SIZE, IMAGE_BASE_URL } from '../../config'
 import NoImage from '../../images/no_image.jpg'
+import Thumb from '../Thumb'
 import { Link } from 'react-router-dom'
 
 const HeaderSearch: React.FC = () => {
@@ -22,8 +23,7 @@ const HeaderSearch: React.FC = () => {
     } else setResults([])
     return () => clearTimeout(timer)
   }, [state])
-  useEffect(() => {
-  }, [showResults])
+  useEffect(() => {}, [showResults])
 
   return (
     <Content className={'bp4-dark' + (state.length > 0 ? ' expanded' : '')}>
@@ -66,15 +66,36 @@ const HeaderSearch: React.FC = () => {
           {results.map((movie) => (
             <Link to={`/${movie.id}`}>
               <div key={movie.id} className="result-item">
-                <img
-                  src={
+                <Thumb
+                  image={
                     movie.poster_path
                       ? IMAGE_BASE_URL + SEARCH_THUMB_SIZE + movie.poster_path
                       : NoImage
                   }
-                  alt={movie.original_title}
                 />
-                <span>{movie.title}</span>
+                <div className="movie-info">
+                  <span className="movie-title">{movie.title}</span>
+                  <span className="movie-extra">
+                    {movie.vote_average > 0 && (
+                      <span
+                        className={`movie-rating ${
+                          movie.vote_average < 5
+                            ? 'bad'
+                            : movie.vote_average < 8
+                            ? 'average'
+                            : 'good'
+                        }`}
+                      >
+                        {movie.vote_average}
+                      </span>
+                    )}
+                    {movie.release_date && (
+                      <span className="movie-year">
+                        ({movie.release_date.split('-')[0]})
+                      </span>
+                    )}
+                  </span>
+                </div>
               </div>
             </Link>
           ))}

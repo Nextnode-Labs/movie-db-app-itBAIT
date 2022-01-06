@@ -3,6 +3,7 @@ import styled from 'styled-components'
 export const Wrapper = styled.div`
   background: var(--darkGrey);
   padding: 0 20px;
+  border-bottom: 1px solid var(--medGrey);
 `
 
 export const Content = styled.div`
@@ -13,6 +14,10 @@ export const Content = styled.div`
   padding: 20px 0;
   margin: 0 auto;
   color: var(--white);
+  gap: 10px;
+  @media screen and (max-width: 800px) {
+    flex-direction: column;
+  }
 
   a {
     color: var(--white);

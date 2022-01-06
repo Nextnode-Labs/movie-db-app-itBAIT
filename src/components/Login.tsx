@@ -3,7 +3,8 @@ import API from '../API'
 import Button from './Button'
 import { Wrapper } from './Login.styles'
 import { Context } from '../context'
-import { useContext, useState } from 'react'
+import { useContext, useState, useEffect } from 'react'
+import { SITE_NAME } from '../config'
 
 const Login: React.FC = () => {
   const [userName, setUserName] = useState('')
@@ -40,6 +41,10 @@ const Login: React.FC = () => {
     if (name === 'username') setUserName(value)
     if (name === 'password') setPassword(value)
   }
+
+  useEffect(() => {
+    document.title = `Login | ${SITE_NAME}`
+  }, [])
 
   return (
     <Wrapper>

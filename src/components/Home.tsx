@@ -1,6 +1,11 @@
 import { useEffect, useCallback } from 'react'
 // config
-import { POSTER_SIZE, BACKDROP_SIZE, IMAGE_BASE_URL } from '../config'
+import {
+  POSTER_SIZE,
+  BACKDROP_SIZE,
+  IMAGE_BASE_URL,
+  SITE_NAME,
+} from '../config'
 // components
 import HeroImage from './HeroImage'
 import Grid from './Grid'
@@ -35,6 +40,10 @@ const Home: React.FC = () => {
       document.removeEventListener('scroll', scrollHandler)
     }
   }, [scrollHandler])
+
+  useEffect(() => {
+    document.title = `Homepage | ${SITE_NAME}`
+  }, [])
 
   if (error) return <div>Something went wrong...</div>
 

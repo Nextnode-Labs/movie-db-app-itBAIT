@@ -18,6 +18,8 @@ const BACKDROP_SIZE: string = 'original'
 const POSTER_SIZE: string = 'w780'
 const SEARCH_THUMB_SIZE = 'w92'
 
+const SITE_NAME = 'TMDB React'
+
 export {
   SEARCH_BASE_URL,
   POPULAR_BASE_URL,
@@ -30,4 +32,5 @@ export {
   REQUEST_TOKEN_URL,
   LOGIN_URL,
   SESSION_ID_URL,
+  SITE_NAME,
 }

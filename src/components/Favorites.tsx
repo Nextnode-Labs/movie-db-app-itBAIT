@@ -1,5 +1,6 @@
 // config
-import { POSTER_SIZE, IMAGE_BASE_URL } from '../config'
+import { POSTER_SIZE, IMAGE_BASE_URL, SITE_NAME } from '../config'
+import { useEffect } from 'react'
 // components
 import Grid from './Grid'
 import Thumb from './Thumb'
@@ -11,9 +12,12 @@ import { useFavoritesFetch } from '../hooks/useFavoritesFetch'
 // images
 import NoImage from '../images/no_image.jpg'
 
-
 const Favorites: React.FC = () => {
   const { state, loading, error, setSsLoadingMore } = useFavoritesFetch()
+
+  useEffect(() => {
+    document.title = `Favorites | ${SITE_NAME}`
+  }, [])
 
   if (error) return <div>Something went wrong...</div>
 
