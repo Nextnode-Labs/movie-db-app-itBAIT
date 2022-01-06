@@ -28,7 +28,7 @@ export const usePersonFetch = (personId: string) => {
       }
     }
 
-    const sessionState = isPersistedState(personId)
+    const sessionState = isPersistedState('person-' + personId)
     if (sessionState) {
       setState(sessionState)
       setLoading(false)
@@ -39,11 +39,11 @@ export const usePersonFetch = (personId: string) => {
   }, [personId])
 
   useEffect(() => {
-    sessionStorage.setItem(personId, JSON.stringify(state))
+    sessionStorage.setItem('person-' + personId, JSON.stringify(state))
   }, [personId, state])
 
   useEffect(() => {
-    if (error) sessionStorage.removeItem(personId)
+    if (error) sessionStorage.removeItem('person-' + personId)
   }, [personId, error])
 
   return { state, loading, error }
