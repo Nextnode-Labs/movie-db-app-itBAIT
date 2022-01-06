@@ -40,6 +40,7 @@ export type Movies = {
 }
 
 export type Cast = {
+  id: number
   character: string
   credit_id: number
   name: string
@@ -56,6 +57,18 @@ export type Credits = {
   id: number
   cast: Cast[]
   crew: Crew[]
+}
+
+export type Person = {
+  birthday: string
+  known_for_department: string
+  deathday: null
+  id: number
+  name: string
+  gender: number
+  biography: string
+  place_of_birth: string
+  profile_path: string
 }
 
 const apiSettings = {
@@ -75,6 +88,10 @@ const apiSettings = {
   },
   searchMovie: async (searchTerm: string): Promise<Movies> => {
     const endpoint: string = `${API_URL}search/movie?api_key=${API_KEY}&query=${searchTerm}`
+    return await (await fetch(endpoint)).json()
+  },
+  fetchPerson: async (personId: string | undefined): Promise<Person> => {
+    const endpoint: string = `${API_URL}person/${personId}?api_key=${API_KEY}`
     return await (await fetch(endpoint)).json()
   },
   // Bonus material below for login

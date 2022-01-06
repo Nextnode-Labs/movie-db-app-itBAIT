@@ -64,7 +64,7 @@ const HeaderSearch: React.FC = () => {
           }}
         >
           {results.map((movie) => (
-            <Link key={movie.id} to={`/${movie.id}`}>
+            <Link key={movie.id} to={`/movie/${movie.id}`}>
               <div className="result-item">
                 <Thumb
                   image={

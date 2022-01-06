@@ -1,16 +1,20 @@
 import { Wrapper, Image } from './Actor.styles'
+import { Link } from 'react-router-dom'
 
 type Props = {
+  id: number
   name: string
-  character: string
-  imageUrl: string
+  character?: string
+  imageUrl?: string
 }
 
-const Actor: React.FC<Props> = ({ name, character, imageUrl }) => (
+const Actor: React.FC<Props> = ({ id, name, character, imageUrl }) => (
   <Wrapper>
-    <Image src={imageUrl} alt="actor-thumb" />
-    <h3>{name}</h3>
-    <p>{character}</p>
+    <Link to={`/person/${id}`}>
+      <Image src={imageUrl} alt="actor-thumb" />
+      <h3>{name}</h3>
+      {character && <p>{character}</p>}
+    </Link>
   </Wrapper>
 )
 
