@@ -12,11 +12,17 @@ export const Wrapper = styled.div`
   p {
     margin: 5px 0;
   }
+  a {
+    color: var(--white);
+  }
+  a:hover {
+    text-decoration: none;
+  }
 `
 export const Image = styled.img`
   display: block;
   width: 100%;
-  height: 300px;
+  height: 400px;
   object-fit: cover;
   border-radius: 15px;
 `

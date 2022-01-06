@@ -29,6 +29,7 @@ const Favorites: React.FC = () => {
           <Thumb
             key={movie.id}
             clickable
+            title={movie.original_title}
             image={
               movie.poster_path
                 ? IMAGE_BASE_URL + POSTER_SIZE + movie.poster_path
