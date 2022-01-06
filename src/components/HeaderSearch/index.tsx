@@ -73,7 +73,29 @@ const HeaderSearch: React.FC = () => {
                       : NoImage
                   }
                 />
-                <span>{movie.title}</span>
+                <div className="movie-info">
+                  <span className="movie-title">{movie.title}</span>
+                  <span className="movie-extra">
+                    {movie.vote_average > 0 && (
+                      <span
+                        className={`movie-rating ${
+                          movie.vote_average < 5
+                            ? 'bad'
+                            : movie.vote_average < 8
+                            ? 'average'
+                            : 'good'
+                        }`}
+                      >
+                        {movie.vote_average}
+                      </span>
+                    )}
+                    {movie.release_date && (
+                      <span className="movie-year">
+                        ({movie.release_date.split('-')[0]})
+                      </span>
+                    )}
+                  </span>
+                </div>
               </div>
             </Link>
           ))}
