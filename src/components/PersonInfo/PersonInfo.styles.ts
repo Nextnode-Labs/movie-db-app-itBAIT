@@ -1,3 +1,4 @@
+import { Person } from './../../API'
 import styled from 'styled-components'
 
 export const Wrapper = styled.div`
@@ -19,8 +20,27 @@ export const Content = styled.div`
     width: 400px;
     color: var(--white);
     gap: 1rem;
+    @media screen and (max-width: 768px) {
+      width: 100%;
+    }
     .person-category {
       font-weight: 600;
+    }
+    .person-title {
+      display: block;
+    }
+  }
+  .person-title {
+    display: block;
+    &.mobile {
+      display: none;
+    }
+    @media screen and (max-width: 768px) {
+      display: none;
+      &.mobile {
+        text-align: center;
+        display: block;
+      }
     }
   }
 `
@@ -41,4 +61,7 @@ export const Image = styled.img`
   object-fit: cover;
   border-radius: 15px;
   align-self: center;
+  @media screen and (max-width: 768px) {
+    height: auto;
+  }
 `

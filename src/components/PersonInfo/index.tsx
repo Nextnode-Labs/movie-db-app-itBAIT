@@ -21,11 +21,11 @@ const PersonInfo: React.FC<Props> = ({ person }) => {
   let age = today.getFullYear() - birthday.getFullYear()
   const m = today.getMonth() - birthday.getMonth()
   if (m < 0 || (m === 0 && today.getDate() < birthday.getDate())) age--
-
   return (
     <Wrapper>
       <Content>
         <div className="person-sidebar">
+          <h1 className="person-title mobile">{person.name}</h1>
           <Image
             src={
               person.profile_path
@@ -58,7 +58,7 @@ const PersonInfo: React.FC<Props> = ({ person }) => {
           </p>
         </div>
         <Text>
-          <h1>{person.name}</h1>
+          <h1 className="person-title">{person.name}</h1>
           <h3>Biography</h3>
           {person.biography.split('\n\n').map((p) => (
             <p>{p}</p>
