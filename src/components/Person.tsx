@@ -3,8 +3,7 @@ import Grid from './Grid'
 import Spinner from './Spinner'
 import BreadCrumb from './BreadCrumb'
 import PersonInfo from './PersonInfo'
-import Actor from './Actor'
-
+import Thumb from './Thumb'
 import { usePersonFetch } from '../hooks/usePersonFetch'
 
 import NoImage from '../images/no_image.jpg'
@@ -25,25 +24,28 @@ const Person: React.FC = () => {
 
   if (loading && !error) return <Spinner centered />
   if (error) return <div>Something went wrong...</div>
+  const notAdultCast = person.credits.cast.filter((cast) => !cast.adult)
   return (
     <>
       <BreadCrumb movieTitle={person.name} />
       <PersonInfo person={person} />
-      {/* <Grid header="Actors">
-        {person.actors.map((actor) => (
-          <Actor
-            key={actor.credit_id}
-            name={actor.name}
-            character={actor.character}
-            id={actor.id}
-            imageUrl={
-              actor.profile_path
-                ? `${IMAGE_BASE_URL}${POSTER_SIZE}${actor.profile_path}`
-                : NoImage
-            }
-          />
-        ))}
-      </Grid> */}
+      {notAdultCast.length > 0 && (
+        <Grid header={'Known for'}>
+          {notAdultCast.map((cast) => (
+            <Thumb
+              key={cast.id}
+              clickable
+              title={cast.original_title}
+              image={
+                cast.poster_path
+                  ? IMAGE_BASE_URL + POSTER_SIZE + cast.poster_path
+                  : NoImage
+              }
+              movieId={cast.id}
+            />
+          ))}
+        </Grid>
+      )}
     </>
   )
 }

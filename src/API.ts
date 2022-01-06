@@ -30,6 +30,7 @@ export type Movie = {
   runtime: number
   revenue: number
   release_date: string
+  adult: boolean
 }
 
 export type Movies = {
@@ -71,6 +72,10 @@ export type Person = {
   profile_path: string
 }
 
+export type PersonCredits = {
+  cast: Movie[]
+}
+
 const apiSettings = {
   fetchMovies: async (searchTerm: string, page: number): Promise<Movies> => {
     const endpoint: string = searchTerm
@@ -92,6 +97,12 @@ const apiSettings = {
   },
   fetchPerson: async (personId: string | undefined): Promise<Person> => {
     const endpoint: string = `${API_URL}person/${personId}?api_key=${API_KEY}`
+    return await (await fetch(endpoint)).json()
+  },
+  fetchPersonCredits: async (
+    personId: string | undefined
+  ): Promise<PersonCredits> => {
+    const endpoint: string = `${API_URL}person/${personId}/movie_credits?api_key=${API_KEY}`
     return await (await fetch(endpoint)).json()
   },
   // Bonus material below for login

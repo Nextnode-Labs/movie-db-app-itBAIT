@@ -1,4 +1,3 @@
-import { Person } from './../../API'
 import styled from 'styled-components'
 
 export const Wrapper = styled.div`

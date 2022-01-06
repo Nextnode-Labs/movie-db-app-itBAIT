@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
 // API
-import API, { Person } from '../API'
+import API, { Person, PersonCredits } from '../API'
 import { isPersistedState } from '../helpers'
 
+export type PersonState = Person & { credits: PersonCredits }
+
 export const usePersonFetch = (personId: string) => {
-  const [state, setState] = useState<Person>({} as Person)
+  const [state, setState] = useState<PersonState>({} as PersonState)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
 
@@ -14,10 +16,12 @@ export const usePersonFetch = (personId: string) => {
         setLoading(true)
         setError(false)
         const person = await API.fetchPerson(personId)
-        // const credits = await API.fetchCredits(personId)
-        // Get directors
+        const credits = await API.fetchPersonCredits(personId)
+        setState({
+          ...person,
+          credits: credits,
+        })
 
-        setState(person)
         setLoading(false)
       } catch (error) {
         setError(true)

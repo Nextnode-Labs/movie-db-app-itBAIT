@@ -60,8 +60,8 @@ const PersonInfo: React.FC<Props> = ({ person }) => {
         <Text>
           <h1 className="person-title">{person.name}</h1>
           <h3>Biography</h3>
-          {person.biography.split('\n\n').map((p) => (
-            <p>{p}</p>
+          {person.biography.split('\n\n').map((p, i) => (
+            <p key={i}>{p}</p>
           ))}
         </Text>
       </Content>
