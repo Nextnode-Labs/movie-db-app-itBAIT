@@ -11,13 +11,13 @@ export const Content = styled.div`
   background: ${Colors.DARK_GRAY5};
 
   .results {
-    max-height: 80vh;
+    min-height: 0;
+    max-height: 70vh;
     overflow-y: auto;
     margin-top: 20px;
-    z-index: 10;
     position: absolute;
+    z-index: 999;
     padding: 10px;
-    min-height: 1rem;
     width: 100%;
     background: var(--medGrey);
     color: var(--lightGrey);
@@ -28,6 +28,7 @@ export const Content = styled.div`
     box-shadow: 0px 2px 5px 2px #555;
     border: solid 1px rgba(238, 238, 238, 0.3);
     outline: none;
+    transition: all 1s;
   }
   .result-item {
     cursor: pointer;

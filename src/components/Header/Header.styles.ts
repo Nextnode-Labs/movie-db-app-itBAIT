@@ -14,6 +14,10 @@ export const Content = styled.div`
   padding: 20px 0;
   margin: 0 auto;
   color: var(--white);
+  gap: 10px;
+  @media screen and (max-width: 800px) {
+    flex-direction: column;
+  }
 
   a {
     color: var(--white);
