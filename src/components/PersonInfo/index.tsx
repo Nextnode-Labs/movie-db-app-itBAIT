@@ -65,11 +65,13 @@ const PersonInfo: React.FC<Props> = ({ person }) => {
               </span>
             </p>
           )}
-          <p>
-            <span className="person-category">Place of Birth</span>
-            <br />
-            <span>{person.place_of_birth}</span>
-          </p>
+          {person.place_of_birth && (
+            <p>
+              <span className="person-category">Place of Birth</span>
+              <br />
+              <span>{person.place_of_birth}</span>
+            </p>
+          )}
         </div>
         <Text>
           <h1 className="person-title">{person.name}</h1>
