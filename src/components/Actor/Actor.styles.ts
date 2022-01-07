@@ -25,4 +25,19 @@ export const Image = styled.img`
   height: 400px;
   object-fit: cover;
   border-radius: 15px;
+  transition: all 0.3s;
+  animation: animateThumb 0.5s;
+
+  :hover {
+    opacity: 0.8;
+  }
+
+  @keyframes animateThumb {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 `
