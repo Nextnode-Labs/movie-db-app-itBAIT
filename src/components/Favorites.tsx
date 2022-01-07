@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 // components
 import Grid from './Grid'
 import Thumb from './Thumb'
+import BreadCrumb from './BreadCrumb'
 // import Spinner from './Spinner'
 import Button from './Button'
 
@@ -23,6 +24,7 @@ const Favorites: React.FC = () => {
 
   return (
     <>
+      <BreadCrumb items={['Favorites']} />
       <Grid header={'My favorite movies'}>
         {state.results.map((movie) => (
           // <div key={movie.id}>{movie.title}</div>

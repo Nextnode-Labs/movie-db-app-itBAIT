@@ -27,7 +27,7 @@ const Person: React.FC = () => {
   const notAdultCast = person.credits.cast.filter((cast) => !cast.adult)
   return (
     <>
-      <BreadCrumb movieTitle={person.name} />
+      <BreadCrumb items={['Persons', person.name]} />
       <PersonInfo person={person} />
       {notAdultCast.length > 0 && (
         <Grid header={'Known for'}>

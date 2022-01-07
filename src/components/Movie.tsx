@@ -28,7 +28,7 @@ const Movie: React.FC = () => {
   if (error) return <div>Something went wrong...</div>
   return (
     <>
-      <BreadCrumb movieTitle={movie.original_title} />
+      <BreadCrumb items={['Movies', movie.original_title]} />
       <MovieInfo movie={movie} />
       <MovieInfoBar
         time={movie.runtime}

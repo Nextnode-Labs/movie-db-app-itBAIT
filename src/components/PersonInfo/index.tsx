@@ -16,11 +16,12 @@ const PersonInfo: React.FC<Props> = ({ person }) => {
   //   await API.rateMovie(user.sessionId, movie.id, parseInt(value))
   // }
   const genders = ['Unknown', 'Female', 'Male']
-  var today = new Date()
+  var last = person.deathday ? new Date(person.deathday) : new Date()
   const birthday = new Date(person.birthday)
-  let age = today.getFullYear() - birthday.getFullYear()
-  const m = today.getMonth() - birthday.getMonth()
-  if (m < 0 || (m === 0 && today.getDate() < birthday.getDate())) age--
+  let age = last.getFullYear() - birthday.getFullYear()
+  const m = last.getMonth() - birthday.getMonth()
+  if (m < 0 || (m === 0 && last.getDate() < birthday.getDate())) age--
+
   return (
     <Wrapper>
       <Content>
@@ -44,18 +45,33 @@ const PersonInfo: React.FC<Props> = ({ person }) => {
             <br />
             <span>{genders[person.gender]}</span>
           </p>
-          <p>
-            <span className="person-category">Birthday</span>
-            <br />
-            <span className="person-category">
-              {`${person.birthday} (Age: ${age})`}
-            </span>
-          </p>
-          <p>
-            <span className="person-category">Place of Birth</span>
-            <br />
-            <span className="person-category">{person.place_of_birth}</span>
-          </p>
+          {person.birthday && (
+            <p>
+              <span className="person-category">Birthday</span>
+              <br />
+              <span>
+                <span>{person.birthday}</span>{' '}
+                {!person.deathday && <span>{`(Age: ${age})`}</span>}
+              </span>
+            </p>
+          )}
+          {person.deathday && (
+            <p>
+              <span className="person-category">Deathday</span>
+              <br />
+              <span>
+                <span>{person.deathday}</span>{' '}
+                {person.deathday && <span>{`(At the age: ${age})`}</span>}
+              </span>
+            </p>
+          )}
+          {person.place_of_birth && (
+            <p>
+              <span className="person-category">Place of Birth</span>
+              <br />
+              <span>{person.place_of_birth}</span>
+            </p>
+          )}
         </div>
         <Text>
           <h1 className="person-title">{person.name}</h1>

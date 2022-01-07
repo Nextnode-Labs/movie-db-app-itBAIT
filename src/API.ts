@@ -63,7 +63,7 @@ export type Credits = {
 export type Person = {
   birthday: string
   known_for_department: string
-  deathday: null
+  deathday: string
   id: number
   name: string
   gender: number
