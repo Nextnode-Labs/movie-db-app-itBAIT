@@ -15,7 +15,7 @@ import { useFavoritesFetch } from '../hooks/useFavoritesFetch'
 import NoImage from '../images/no_image.jpg'
 
 const Favorites: React.FC = () => {
-  const { state, loading, error, setSsLoadingMore } = useFavoritesFetch()
+  const { state, loading, error } = useFavoritesFetch()
 
   useEffect(() => {
     document.title = `Favorites | ${SITE_NAME}`
