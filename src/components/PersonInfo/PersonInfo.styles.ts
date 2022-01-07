@@ -61,6 +61,8 @@ export const Image = styled.img`
   border-radius: 15px;
   align-self: center;
   animation: animateThumb 0.5s;
+  border: 1px solid black;
+
   @media screen and (max-width: 768px) {
     height: auto;
   }

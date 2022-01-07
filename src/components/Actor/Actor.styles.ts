@@ -27,6 +27,7 @@ export const Image = styled.img`
   border-radius: 15px;
   transition: all 0.3s;
   animation: animateThumb 0.5s;
+  border: 1px solid black;
 
   :hover {
     opacity: 0.8;

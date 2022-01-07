@@ -14,6 +14,7 @@ import Thumb from './Thumb'
 import Search from './Search'
 // import Button from './Button'
 import Spinner from './Spinner'
+import RatingBadge from './RatingBadge'
 
 // hooks
 import { useHomeFetch } from '../hooks/useHomeFetch'
@@ -59,18 +60,18 @@ const Home: React.FC = () => {
       <Search setSearchTerm={setSearchTerm} />
       <Grid header={searchTerm ? 'Search result' : 'Popular movies'}>
         {state.results.map((movie) => (
-          // <div key={movie.id}>{movie.title}</div>
-          <Thumb
-            key={movie.id}
-            clickable
-            title={movie.original_title}
-            image={
-              movie.poster_path
-                ? IMAGE_BASE_URL + POSTER_SIZE + movie.poster_path
-                : NoImage
-            }
-            movieId={movie.id}
-          />
+          <RatingBadge key={movie.id} rating={movie.vote_average}>
+            <Thumb
+              clickable
+              title={movie.original_title}
+              image={
+                movie.poster_path
+                  ? IMAGE_BASE_URL + POSTER_SIZE + movie.poster_path
+                  : NoImage
+              }
+              movieId={movie.id}
+            />
+          </RatingBadge>
         ))}
       </Grid>
       {loading && <Spinner />}

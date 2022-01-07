@@ -4,6 +4,7 @@ import Spinner from './Spinner'
 import BreadCrumb from './BreadCrumb'
 import PersonInfo from './PersonInfo'
 import Thumb from './Thumb'
+import RatingBadge from './RatingBadge'
 import { usePersonFetch } from '../hooks/usePersonFetch'
 
 import NoImage from '../images/no_image.jpg'
@@ -32,17 +33,18 @@ const Person: React.FC = () => {
       {notAdultCast.length > 0 && (
         <Grid header={'Known for'}>
           {notAdultCast.map((cast) => (
-            <Thumb
-              key={cast.id}
-              clickable
-              title={cast.original_title}
-              image={
-                cast.poster_path
-                  ? IMAGE_BASE_URL + POSTER_SIZE + cast.poster_path
-                  : NoImage
-              }
-              movieId={cast.id}
-            />
+            <RatingBadge key={cast.id} rating={cast.vote_average}>
+              <Thumb
+                clickable
+                title={cast.original_title}
+                image={
+                  cast.poster_path
+                    ? IMAGE_BASE_URL + POSTER_SIZE + cast.poster_path
+                    : NoImage
+                }
+                movieId={cast.id}
+              />
+            </RatingBadge>
           ))}
         </Grid>
       )}

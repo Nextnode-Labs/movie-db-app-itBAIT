@@ -9,7 +9,7 @@ type Props = {
 }
 
 const Thumb: React.FC<Props> = ({ image, movieId, clickable, title }) => (
-  <div>
+  <>
     {clickable ? (
       <Link to={`/movie/${movieId}`}>
         <Image src={image} alt="movie-thumb" title={title} />
@@ -17,7 +17,7 @@ const Thumb: React.FC<Props> = ({ image, movieId, clickable, title }) => (
     ) : (
       <Image src={image} alt="movie-thumb" title={title} />
     )}
-  </div>
+  </>
 )
 
 export default Thumb
