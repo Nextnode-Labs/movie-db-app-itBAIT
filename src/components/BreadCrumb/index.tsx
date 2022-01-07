@@ -4,16 +4,19 @@ import { Wrapper, Content } from './BreadCrumb.styles'
 import { useNavigate } from 'react-router-dom'
 
 type Props = {
-  movieTitle: string
+  items: string[]
 }
 
-const BreadCrumb: React.FC<Props> = ({ movieTitle }) => {
+const BreadCrumb: React.FC<Props> = ({ items }) => {
   const navigate = useNavigate()
   const goHome = () => {
     navigate('/')
   }
 
-  const BREADCRUMBS = [{ onClick: goHome, text: 'Home' }, { text: movieTitle }]
+  const BREADCRUMBS = [
+    { onClick: goHome, text: 'Home' },
+    ...items.map((item) => ({ text: item })),
+  ]
   return (
     <Wrapper className="bp4-dark">
       <Content>
