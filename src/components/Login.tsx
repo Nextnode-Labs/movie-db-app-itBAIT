@@ -10,12 +10,14 @@ const Login: React.FC = () => {
   const [userName, setUserName] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const [_user, setuser, _cookies, setCookie]: any = useContext(Context)
   const navigate = useNavigate()
 
   const handleSubmit = async () => {
     setError(false)
+    setLoading(true)
     try {
       const requestToken = await API.getRequestToken()
       const session = await API.authenticate(requestToken, userName, password)
@@ -31,6 +33,7 @@ const Login: React.FC = () => {
       navigate('/')
     } catch {
       setError(true)
+      setLoading(false)
     }
   }
 
@@ -63,7 +66,7 @@ const Login: React.FC = () => {
         name="password"
         onChange={handleInput}
       />
-      <Button text="Login" callback={handleSubmit} />
+      <Button text="Login" loading={loading} callback={handleSubmit} />
     </Wrapper>
   )
 }

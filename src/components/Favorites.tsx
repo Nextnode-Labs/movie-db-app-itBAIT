@@ -5,8 +5,9 @@ import { useEffect } from 'react'
 import Grid from './Grid'
 import Thumb from './Thumb'
 import BreadCrumb from './BreadCrumb'
-// import Spinner from './Spinner'
-import Button from './Button'
+import Spinner from './Spinner'
+// import Button from './Button'
+import RatingBadge from './RatingBadge'
 
 // hooks
 import { useFavoritesFetch } from '../hooks/useFavoritesFetch'
@@ -27,25 +28,26 @@ const Favorites: React.FC = () => {
       <BreadCrumb items={['Favorites']} />
       <Grid header={'My favorite movies'}>
         {state.results.map((movie) => (
-          // <div key={movie.id}>{movie.title}</div>
-          <Thumb
-            key={movie.id}
-            clickable
-            title={movie.original_title}
-            image={
-              movie.poster_path
-                ? IMAGE_BASE_URL + POSTER_SIZE + movie.poster_path
-                : NoImage
-            }
-            movieId={movie.id}
-          />
+          <RatingBadge key={movie.id} rating={movie.vote_average}>
+            <Thumb
+              key={movie.id}
+              clickable
+              title={movie.original_title}
+              image={
+                movie.poster_path
+                  ? IMAGE_BASE_URL + POSTER_SIZE + movie.poster_path
+                  : NoImage
+              }
+              movieId={movie.id}
+            />
+          </RatingBadge>
         ))}
       </Grid>
-      {/* {loading && <SpinnerWrapper />} */}
-      {loading && <Button loading />}
-      {state.page < state.total_pages && !loading ? (
+      {loading && <Spinner />}
+      {/* {loading && <Button loading />} */}
+      {/* {state.page < state.total_pages && !loading ? (
         <Button text="Load more" callback={() => setSsLoadingMore(true)} />
-      ) : null}
+      ) : null} */}
     </>
   )
 }
