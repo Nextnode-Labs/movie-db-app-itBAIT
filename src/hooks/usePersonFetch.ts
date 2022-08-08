@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 // API
 import API, { Person, PersonCredits } from '../API'
 import { isPersistedState } from '../helpers'
@@ -10,24 +10,25 @@ export const usePersonFetch = (personId: string) => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
 
-  useEffect(() => {
-    const fetchMovie = async () => {
-      try {
-        setLoading(true)
-        setError(false)
-        const person = await API.fetchPerson(personId)
-        const credits = await API.fetchPersonCredits(personId)
-        setState({
-          ...person,
-          credits: credits,
-        })
+  const fetchMovie = useCallback(async () => {
+    try {
+      setLoading(true)
+      setError(false)
+      const person = await API.fetchPerson(personId)
+      const credits = await API.fetchPersonCredits(personId)
 
-        setLoading(false)
-      } catch (error) {
-        setError(true)
-      }
+      setState({
+        ...person,
+        credits: credits,
+      })
+
+      setLoading(false)
+    } catch (error) {
+      setError(true)
     }
+  }, [setState, setLoading, setError, personId])
 
+  useEffect(() => {
     const sessionState = isPersistedState('person-' + personId)
     if (sessionState) {
       setState(sessionState)
@@ -36,14 +37,15 @@ export const usePersonFetch = (personId: string) => {
     }
 
     fetchMovie()
-  }, [personId])
+  }, [personId, fetchMovie])
 
   useEffect(() => {
-    sessionStorage.setItem('person-' + personId, JSON.stringify(state))
+    if (Object.keys(state).length !== 0)
+      sessionStorage.setItem('person-' + personId, JSON.stringify(state))
   }, [personId, state])
 
   useEffect(() => {
-    if (error) sessionStorage.removeItem('person-' + personId)
+    // if (error) sessionStorage.removeItem('person-' + personId)
   }, [personId, error])
 
   return { state, loading, error }

@@ -2,6 +2,7 @@ import { Wrapper, Badge } from './RatingBadge.styles'
 
 type Props = {
   rating: number
+  children: React.ReactNode
 }
 
 const RatingBadge: React.FC<Props> = ({ rating, children }) => (

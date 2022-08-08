@@ -4,7 +4,11 @@ import API from './API'
 
 export const Context = createContext(undefined)
 
-const UserProvider: React.FC = ({ children }) => {
+type Props = {
+  children: React.ReactNode
+}
+
+const UserProvider: React.FC<Props> = ({ children }) => {
   const [state, setState]: any = useState(undefined)
   const [cookies, setCookie, removeCookie] = useCookies([
     'user',

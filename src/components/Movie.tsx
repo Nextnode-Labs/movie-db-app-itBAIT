@@ -10,15 +10,13 @@ import { useMovieFetch } from '../hooks/useMovieFetch'
 
 import NoImage from '../images/no_image.jpg'
 
-import { useParams } from 'react-router'
+import { useParams } from 'react-router-dom'
 import { useEffect } from 'react'
 
 const Movie: React.FC = () => {
   let { movieId } = useParams()
 
-  const movieIdP = movieId ? movieId : ''
-
-  const { state: movie, loading, error } = useMovieFetch(movieIdP)
+  const { state: movie, loading, error } = useMovieFetch(movieId || '')
 
   useEffect(() => {
     document.title = `${movie.original_title || 'Loading...'} | ${SITE_NAME}`

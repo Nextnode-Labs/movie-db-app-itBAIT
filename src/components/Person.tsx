@@ -9,15 +9,13 @@ import { usePersonFetch } from '../hooks/usePersonFetch'
 
 import NoImage from '../images/no_image.jpg'
 
-import { useParams } from 'react-router'
+import { useParams } from 'react-router-dom'
 import { useEffect } from 'react'
 
 const Person: React.FC = () => {
   let { personId } = useParams()
 
-  const personIdP = personId ? personId : ''
-
-  const { state: person, loading, error } = usePersonFetch(personIdP)
+  const { state: person, loading, error } = usePersonFetch(personId || '')
 
   useEffect(() => {
     document.title = `${person.name || 'Loading...'} | ${SITE_NAME}`

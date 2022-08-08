@@ -2,6 +2,7 @@ import { Wrapper, Content } from './Grid.styles'
 
 type Props = {
   header: string
+  children: React.ReactNode
 }
 
 const Grid: React.FC<Props> = ({ header, children }) => (
