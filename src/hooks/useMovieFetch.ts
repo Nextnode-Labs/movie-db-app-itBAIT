@@ -30,7 +30,7 @@ export const useMovieFetch = (movieId: string) => {
     } catch (error) {
       setError(true)
     }
-  }, [setState, setLoading, setError, movieId])
+  }, [movieId])
 
   useEffect(() => {
     const sessionState = isPersistedState('movie-' + movieId)

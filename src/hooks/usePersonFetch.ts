@@ -26,7 +26,7 @@ export const usePersonFetch = (personId: string) => {
     } catch (error) {
       setError(true)
     }
-  }, [setState, setLoading, setError, personId])
+  }, [personId])
 
   useEffect(() => {
     const sessionState = isPersistedState('person-' + personId)

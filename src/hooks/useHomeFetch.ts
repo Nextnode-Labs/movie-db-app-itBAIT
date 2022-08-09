@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 // API
 import API, { Movie } from '../API'
 import { isPersistedState } from '../helpers'
@@ -17,7 +17,7 @@ export const useHomeFetch = () => {
   const [error, setError] = useState(false)
   const [isLoadingMore, setIsLoadingMore] = useState(false)
 
-  const fetchMovies = async (page: number, searchTerm = '') => {
+  const fetchMovies = useCallback(async (page: number, searchTerm = '') => {
     try {
       setError(false)
       setLoading(true)
@@ -31,11 +31,12 @@ export const useHomeFetch = () => {
       setError(true)
     }
     setLoading(false)
-  }
+  }, [])
+
   // Initial
   useEffect(() => {
     fetchMovies(1)
-  }, [])
+  }, [fetchMovies])
   // Search
   useEffect(() => {
     if (!searchTerm) {
@@ -47,13 +48,13 @@ export const useHomeFetch = () => {
     }
     setState(initialState)
     fetchMovies(1, searchTerm)
-  }, [searchTerm])
+  }, [searchTerm, fetchMovies])
   // load more
   useEffect(() => {
     if (!isLoadingMore) return
     fetchMovies(state.page + 1, searchTerm)
     setIsLoadingMore(false)
-  }, [isLoadingMore, searchTerm, state.page])
+  }, [isLoadingMore, searchTerm, state.page, fetchMovies])
 
   useEffect(() => {
     if (!searchTerm) {
